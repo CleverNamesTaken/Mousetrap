@@ -1,0 +1,144 @@
+*mousetrap.txt*      For Neovim >= 0.8.0      Last change: 2025 March 21
+
+==============================================================================
+Table of Contents                          *mousetrap-table-of-contents*
+
+1. Mousetrap overview                               |mousetrap-overview|
+2. Tutorial                                         |mousetrap-tutorial|
+3. Sendkeys                                         |mousetrap-sendkeys|
+4. Timestamp                                       |mousetrap-timestamp|
+5. Safety                                             |mousetrap-safety|
+6. Workspace Management                             mousetrap-workspace|
+7. Installation                                 |mousetrap-installation|
+8. Configuration                               |mousetrap-configuration|
+9. Commands                                         |mousetrap-commands|
+
+==============================================================================
+1. Mousetrap overview                             *mousetrap-overview*
+
+Mousetrap is a neovim plugin that uses tmux and scripted windows to allow users 
+to execute complex terminal operations by keeping your hands on the keyboard 
+and off of the mouse.  The major goal is to reduce cognitive load by working 
+in a nvim instance and actively documenting your actions as you operate.
+
+Mousetrap is similar to vim-slime, but more tmux specific with better 
+terminal navigation and logging features. 
+
+==============================================================================
+2. Tutorial                                           *mousetrap-tutorial*
+
+See the README.md associated with this plugin.
+
+
+==============================================================================
+3. Sendkeys                                         *mousetrap-sendkeys*
+
+There are three different flavors of "sendkeys".  Under the hood, this is merely
+a wrapper around the tmux send-keys function.  These three flavors are as
+follows:
+
+1) `sendSave()` - Send the current line to tmux, and save the current line in
+your buffer.  The default shortcut for this command is `H`.
+2) `sendConsume()` - Send the current line to tmux, and remove the current line
+in your buffer.  The default shortcut for this command is `K`.
+3) `sendFetch()` - Send the current line to tmux, and copy the output back to
+your buffer.  The default shortcut for this command is `U`.
+
+There is also a special case of using `<leader>c` to send a CTRL+C to the 
+currently focused pane.  This is because it was disrupting to have to leave
+vim to manually stop a process.
+
+==============================================================================
+4. Timestamp                                         *mousetrap-timestamp*
+
+In conducting red team assessments, the reason why Mousetrap was developed,
+keeping track of timestamps is important in allowing network defenders to
+deconflict red team operations from real adveraries.  Mousetrap uses the
+`timestamp()` function to record the timestamp and the tmux terminal to your
+vim buffer.  The default shortcut for this command is `<C-s>` (mnemonic is 
+*S*tamp).
+
+==============================================================================
+5. Safety                                            *mousetrap-safety*
+
+Related to this timestamp is Mousetrap's safety features.  An operator must
+avoid sending the wrong commands to the wrong window.  The safety feature
+will look back in the current buffer to the previous "terminal tag" and check
+if it matches the currently focused tmux terminal.  A terminal tag has the 
+format of "[[ WINDOW_NAME~PANE_NAME ]]".  If the terminal tag does not match,
+Mousetrap will prevent execution of the send keys function.
+
+The `smartPane()` function will re-focus the Tmux session on the terminal tag
+last observed in the vim buffer, or create it if it does not exist.  By default,
+the shortcut for `smartPane()` is `<c-k>`.
+
+==============================================================================
+6. Workspace Management                               *mousetrap-workspace*
+
+Mousetrap attempts to make management of your workspace easier by providing
+several ergonomic features:
+
+Navigate to another window with `<leader><WINDOW_INDEX_NUMBER>`.  For example,
+If you want to take a look at the tmux window with the index number of 3,
+type `<leader>3`.
+
+Reformat the pane layout for current window with `<leader><c-space>`. This is
+just a wrapper for tmux's next-layout function.
+
+Focus on the next pane of the current tmux window with `<leader><space>`. This
+is just a wrapper for the command "tmux select-pane -t Mousetrap:.+"
+
+Toggle zoom focus on the currently focused pane with `<leader>z`.  Execute 
+the same command again to zoom back out.
+
+Reset the current pane with `<c-a>`.  Note that this will clobber your ability
+to increment the number under the cursor, so consider changing in 
+plugin/mousetrap.lua if you use this feature.
+
+
+==============================================================================
+7. Installation                                 *mousetrap-installation*
+
+Execute mousetrapInstall.sh.
+
+Contents are as follows:
+
+```
+#!/bin/bash
+
+mkdir -p ~/.config/nvim
+cp -r lua ~/.config/nvim
+cp -r plugin ~/.config/nvim
+echo 'require("mousetrap")' >> ~/.config/nvim/init.lua
+sudo apt install tmux neovim -y
+```
+
+==============================================================================
+8. Configuration                               *mousetrap-configuration*
+
+`mousetrap/config.lua` has three variables:
+
+workDir = homeDir .. "/work/mousetrap/" ,
+logDir = homeDir .. "/work/mousetrap/logs/" ,
+logTime = 5
+
+`homeDir` is $HOME.
+`workDir` is a folder that will be created and contain the folders for each
+mousetrap terminal that is created.
+`logDir` is a folder that will contain a csv of all the mousetrap executed
+commands, as well as the scripted window for each terminal, and the lastCommand.
+`logTime` is a variable, in minutes, that will be used to determine if a
+mousetrap window has gone stale.
+
+
+==============================================================================
+9. Commands                                         *mousetrap-commands*
+
+There are a few exposed commands to know:
+`StartMousetrap` - Creates the tmux session.
+`StopMousetrap` - Kills the tmux session.
+`NewWindow` - Creates a new tmux window.
+`NewPane` - Creates a new pane within an existing tmux window.
+
+
+vim:tw=78:ts=8:noet:ft=help:norl:

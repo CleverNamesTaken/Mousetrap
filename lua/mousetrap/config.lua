@@ -2,9 +2,6 @@
 ---@class Config
 local M = {}
 
----@class DefaultOptions
-M.defaults = { name = "John Doe" }
-
 ---@class Options
 -- need to use full paths, aliases or relative paths will not work
 local homeDir = os.getenv("HOME")
