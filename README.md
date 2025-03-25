@@ -29,6 +29,12 @@ Running `mousetrapInstall.sh` will do this as well.
 
 See TUTORIAL.md
 
+# TODO
+
+Figure out plugin managers.
+
+Start tmux with some nicer settings so you can see the name of the panes.
+
 # Similar projects
 
 [vim slime](https://github.com/christoomey/vim-tmux-runner)

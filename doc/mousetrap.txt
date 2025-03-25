@@ -8,7 +8,7 @@ Table of Contents                          *mousetrap-table-of-contents*
 3. Sendkeys                                         |mousetrap-sendkeys|
 4. Timestamp                                       |mousetrap-timestamp|
 5. Safety                                             |mousetrap-safety|
-6. Workspace Management                             mousetrap-workspace|
+6. Workspace Management                            |mousetrap-workspace|
 7. Installation                                 |mousetrap-installation|
 8. Configuration                               |mousetrap-configuration|
 9. Commands                                         |mousetrap-commands|
@@ -56,7 +56,7 @@ keeping track of timestamps is important in allowing network defenders to
 deconflict red team operations from real adveraries.  Mousetrap uses the
 `timestamp()` function to record the timestamp and the tmux terminal to your
 vim buffer.  The default shortcut for this command is `<C-s>` (mnemonic is 
-*S*tamp).
+Stamp).
 
 ==============================================================================
 5. Safety                                            *mousetrap-safety*
