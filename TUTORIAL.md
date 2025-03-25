@@ -171,11 +171,11 @@ Notice that it was smart enough to add the pane to the window that already exist
 
 Any command that we execute through Mousetrap is saved in a mousetrap.csv file located wherever we define our logDir in config.lua.
 
-Assuming you did not change the config.lua yet, the logDir is located in the home directory of the user running Mousetrap. 
+Assuming you did not change the config.lua yet, the logDir is located in the `work` directory within the home directory of the user running Mousetrap. 
 
 ```
 [[ LOCAL~Admin ]]
-cat ~/mousetrap/logs/mousetrap.csv
+cat ~/work/mousetrap/logs/mousetrap.csv
 ```
 
 It records the time the command was executed, the terminal in which it was executed, and the command that was executed.
@@ -188,14 +188,14 @@ By default, they are located at ~/mousetrap/logs/$TERMINAL_TAG
 
 ```
 [[ LOCAL~Admin ]]
-ls ~/mousetrap/logs/LOCAL~Admin/
+ls ~/work/mousetrap/logs/LOCAL~Admin/
 ```
 
 They are named with the Mousetrap command index number, the time of execution, the terminal tag, and the command that was executed.. If you read the yaml file, you will see that it contains the full command that was executed, the time it was executed, the target pane, the time the log was generated, and an attempt at the output.
 
 ```
 [[ LOCAL~Admin ]]
-cat ~/mousetrap/logs/LOCAL~Admin/*ps*.yaml| head -n 20
+cat ~/work/mousetrap/logs/LOCAL~Admin/*ps*.yaml| head -n 20
 ```
 
 The output recorded in the yaml will probably be imperfect because there is no programmatic way to tell if the output has been returned entirely.  Mousetrap assumes that the output is back if the user types another sendkeys command, pulls back the output with `-`, or forces a blind update by pressing `+`.
@@ -216,7 +216,7 @@ The last logging file is at $logDir/lastCommand.txt.  It contains what Mousetrap
 ```
 [[ LOCAL~Admin ]]
 id
-cat ~/mousetrap/logs/lastCommand.txt
+cat ~/work/mousetrap/logs/lastCommand.txt
 ```
 
 It is useful if you want to parse the output a command that you executed, but don't want to re-run the command or go into the command execution yaml file.  This log is also updated when you use either fetch output from the last command with `-` or do a blind update with `+`.
