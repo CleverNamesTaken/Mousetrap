@@ -6,7 +6,7 @@ Mousetrap is similar to vim-slime, but more tmux specific with better terminal n
 
 # Why use Mousetrap?
 
-When conducting red team assessments, I wanted to improve my efficiency and logging.  I found that I could address both of these goals by primarilly operating within vim.  By synergizing tmux, [ultisnips](https://github.com/SirVer/ultisnips) and vim, I addressed several challenges:
+When conducting red team assessments, I wanted to improve my efficiency and logging.  I found that I could address both of these goals by primarilly operating within vim.  By synergizing tmux, [ultisnips](https://github.com/SirVer/ultisnips) and vim, I could:
 
 1) Stay focused on the objective at hand by remaining in vim and sending my commands to tmux windows.
 2) Stay consistent by using red team playbooks developed and stored as Ultisnips snippets.
