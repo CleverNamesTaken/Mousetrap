@@ -1,251 +1,249 @@
-# A Neovim Plugin Template
+# Description
 
-A template repository used to create Neovim plugins.
+Mousetrap is a neovim plugin that uses tmux and scripted windows to allow users to execute complex terminal operations by keeping your hands on the keyboard and off of the mouse.  The major goal is to reduce cognitive load by working in a nvim instance and actively documenting your actions as you operate.
 
-| <!-- -->     | <!-- -->                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
-|--------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Build Status | [![unittests](https://img.shields.io/github/actions/workflow/status/ColinKennedy/nvim-best-practices-plugin-template/test.yml?branch=main&style=for-the-badge&label=Unittests)](https://github.com/ColinKennedy/nvim-best-practices-plugin-template/actions/workflows/test.yml)  [![documentation](https://img.shields.io/github/actions/workflow/status/ColinKennedy/nvim-best-practices-plugin-template/documentation.yml?branch=main&style=for-the-badge&label=Documentation)](https://github.com/ColinKennedy/nvim-best-practices-plugin-template/actions/workflows/documentation.yml)  [![luacheck](https://img.shields.io/github/actions/workflow/status/ColinKennedy/nvim-best-practices-plugin-template/luacheck.yml?branch=main&style=for-the-badge&label=Luacheck)](https://github.com/ColinKennedy/nvim-best-practices-plugin-template/actions/workflows/luacheck.yml) [![llscheck](https://img.shields.io/github/actions/workflow/status/ColinKennedy/nvim-best-practices-plugin-template/llscheck.yml?branch=main&style=for-the-badge&label=llscheck)](https://github.com/ColinKennedy/nvim-best-practices-plugin-template/actions/workflows/llscheck.yml) [![checkhealth](https://img.shields.io/github/actions/workflow/status/ColinKennedy/nvim-best-practices-plugin-template/checkhealth.yml?branch=main&style=for-the-badge&label=checkhealth)](https://github.com/ColinKennedy/nvim-best-practices-plugin-template/actions/workflows/checkhealth.yml) [![stylua](https://img.shields.io/github/actions/workflow/status/ColinKennedy/nvim-best-practices-plugin-template/stylua.yml?branch=main&style=for-the-badge&label=Stylua)](https://github.com/ColinKennedy/nvim-best-practices-plugin-template/actions/workflows/stylua.yml)  [![urlchecker](https://img.shields.io/github/actions/workflow/status/ColinKennedy/nvim-best-practices-plugin-template/urlchecker.yml?branch=main&style=for-the-badge&label=URLChecker)](https://github.com/ColinKennedy/nvim-best-practices-plugin-template/actions/workflows/urlchecker.yml)  |
-| License      | [![License-MIT](https://img.shields.io/badge/License-MIT-blue?style=for-the-badge)](https://github.com/ColinKennedy/nvim-best-practices-plugin-template/blob/main/LICENSE)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
-| Social       | [![RSS](https://img.shields.io/badge/rss-F88900?style=for-the-badge&logo=rss&logoColor=white)](https://github.com/ColinKennedy/nvim-best-practices-plugin-template/commits/main/doc/news.txt.atom)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
-
-
-# Features
-- Follows [nvim-best-practices](https://github.com/nvim-neorocks/nvim-best-practices)
-- Fast start-up (~1 ms)
-- Auto-release to [luarocks](https://luarocks.org) & [GitHub](https://github.com/ColinKennedy/nvim-best-practices-plugin-template/releases)
-- Automated user documentation (using [panvimdoc](https://github.com/kdheepak/panvimdoc))
-- Automated API documentation (using [mini.doc](https://github.com/echasnovski/mini.doc))
-- Automated HTML documentation + self-publishing using [emmylua_doc_cli](https://github.com/CppCXY/emmylua-analyzer-rust/tree/main/crates/emmylua_doc_cli) & [mkdocs-material](https://github.com/squidfunk/mkdocs-material)
-    - Yes, this repository has a website! Check it out at [nvim-best-practices-plugin-template](https://colinkennedy.github.io/nvim-best-practices-plugin-template)!
-- Vimtags generation
-- Built-in Vim commands
-- A high quality command mode parser
-- Auto-completes your commands at any cursor position
-- No external dependencies[*](https://github.com/ColinKennedy/nvim-best-practices-plugin-template/wiki/External-Dependencies-Disclaimer)
-- [LuaCATS](https://luals.github.io/wiki/annotations/) annotations and type-hints, everywhere
-- [RSS feed support](https://github.com/ColinKennedy/nvim-best-practices-plugin-template/commits/main/doc/news.txt.atom)
-- Built-in logging to stdout / files
-- Unittests use the full power of native [busted](https://github.com/lunarmodules/busted)
-- Automated testing matrix supports 9 Neovim/OS combinations
-    - neovim: `[v0.10.0, stable, nightly]`
-    - os: `[ubuntu-latest, macos-latest, windows-latest]`
-- 100% Lua
-- Uses [Semantic Versioning](https://semver.org)
-- Integrations
-    - [lualine.nvim](https://github.com/nvim-lualine/lualine.nvim)
-    - [telescope.nvim](https://github.com/nvim-telescope/telescope.nvim)
-    - [`:checkhealth`](https://github.com/ColinKennedy/nvim-best-practices-plugin-template/actions/workflows/checkhealth.yml)
-- Github actions for:
-    - [StyLua](https://github.com/JohnnyMorganz/StyLua) - Auto-formats Lua code
-    - [llscheck](https://github.com/jeffzi/llscheck) - Checks for Lua type mismatches
-    - [luacheck](https://github.com/mpeterv/luacheck) - Checks for Lua code issues
-    - [luarocks](https://luarocks.org) auto-release ([LUAROCKS_API_KEY secret](https://github.com/nvim-neorocks/sample-luarocks-plugin?tab=readme-ov-file#publishing-to-luarocks) configuration required)
-    - [GitHub](https://github.com/ColinKennedy/nvim-best-practices-plugin-template/releases) auto-release ([PERSONAL_ACCESS_TOKEN secret](https://github.com/nvim-neorocks/sample-luarocks-plugin?tab=readme-ov-file#installing-release-please-recommended) configuration required)
-    - [mini.doc](https://github.com/echasnovski/mini.doc) - API documentation auto-generator
-    - [panvimdoc](https://github.com/kdheepak/panvimdoc) - User documentation auto-generator
-    - [emmylua_doc_cli](https://github.com/CppCXY/emmylua-analyzer-rust/tree/main/crates/emmylua_doc_cli) & [mkdocs-material](https://github.com/squidfunk/mkdocs-material) - Generate HTML from Lua files automatically
-    - [urlchecker](https://github.com/urlstechie/urlchecker-action) - Checks for broken URL links
-    - PR reviews - Reminds users to update `doc/news.txt`
-
-
-# Using This Template
-1. Follow the [Wiki instructions](https://github.com/ColinKennedy/nvim-best-practices-plugin-template/wiki/Using-This-Template)
-2. Once you're done, remove this section (the rest of this README.md file should be kept / customized to your needs)
-
+Mousetrap is similar to vim-slime, but more tmux specific with better terminal navigation and logging features.  Credit to Erik Falor's talk (Vim Muggle to Wizard in 10 Easy Steps)[youtube.com/watch?v=-7RSVclyOEg] for unlocking the Wizardry of vim.
 
 # Installation
-<!-- TODO: (you) - Adjust and add your dependencies as needed here -->
-- [lazy.nvim](https://github.com/folke/lazy.nvim)
-```lua
-{
-    "ColinKennedy/nvim-best-practices-plugin-template",
-    dependencies = { "ColinKennedy/mega.cmdparse", "ColinKennedy/mega.logging" },
-    -- TODO: (you) - Make sure your first release matches v1.0.0 so it auto-releases!
-    version = "v1.*",
-}
+
+I don't really enjoy plugin managers, so here is how you do it manually:
+1) Pull down repo
+2) Move `lua` folder to `~/.config/nvim`
+3) Move `plugin` folder to `~/.config/nvim`
+4) Add `require("mousetrap")` to `init.lua`
+5) Install dependencies
+apt install tmux neovim -y
+
+Running `mousetrapInstall.sh` will do this as well.
+
+# Tutorial
+
+Open up two terminal windows.  In one, open up this README is Neovim, and execute the command `StartMousetrap`.  In the second terminal window, execute the command `tmux attach -t Mousetrap`
+
+## Send keys
+
+### Safety features.
+
+Next, we want to execute commands.  We have a safety feature to make sure we are executing commands where we think we are. Try running the following line by putting your cursor over it in normal mode, and hitting the `H` key.
+
+```
+whoami
 ```
 
+Nothing happened, because you have no tags.  Try again on the line below:
 
-# Configuration
-(These are default values)
-
-<!-- TODO: (you) - Remove / Add / Adjust your configuration here -->
-
-- [lazy.nvim](https://github.com/folke/lazy.nvim)
-```lua
-{
-    "ColinKennedy/nvim-best-practices-plugin-template",
-    config = function()
-        vim.g.plugin_template_configuration = {
-            commands = {
-                goodnight_moon = { read = { phrase = "A good book" } },
-                hello_world = {
-                    say = { ["repeat"] = 1, style = "lowercase" },
-                },
-            },
-            logging = {
-                level = "info",
-                use_console = false,
-                use_file = false,
-            },
-            tools = {
-                lualine = {
-                    arbitrary_thing = {
-                        color = "Visual",
-                        text = " Arbitrary Thing",
-                    },
-                    copy_logs = {
-                        color = "Comment",
-                        text = "󰈔 Copy Logs",
-                    },
-                    goodnight_moon = {
-                        color = "Question",
-                        text = " Goodnight moon",
-                    },
-                    hello_world = {
-                        color = "Title",
-                        text = " Hello, World!",
-                    },
-                },
-                telescope = {
-                    goodnight_moon = {
-                        { "Foo Book", "Author A" },
-                        { "Bar Book Title", "John Doe" },
-                        { "Fizz Drink", "Some Name" },
-                        { "Buzz Bee", "Cool Person" },
-                    },
-                    hello_world = { "Hi there!", "Hello, Sailor!", "What's up, doc?" },
-                },
-            },
-        }
-    end
-}
+```
+[[ LOCAL~Admin ]]
+whoami
 ```
 
+This worked because we have a terminal tag above the command.  The format of a terminal tag is `[[ <WindowName>~<PaneName> ]]`. Use `CTRL+s` to insert a terminal tag while in normal mode.  This is a time stamp for where and when you executed a command.
 
-## Lualine
+The philosphy behind terminal tag naming is that each window is named according to the major task we want to accomplish, and the pane is named based on the subtask needed to support the major task. Do what works for you.
 
-<!-- TODO: (you) - Remove this is you do not want lualine -->
+It is good to get into the habit of timestamping your commands with the terminal tag to make it easier to follow along and retrace your steps.
 
-> Note: You can customize lualine colors here or using
-> `vim.g.plugin_template_configuration`.
+### Consumption
 
-[lualine.nvim](https://github.com/nvim-lualine/lualine.nvim)
-```lua
-require("lualine").setup {
-    sections = {
-        lualine_y = {
-            -- ... Your other configuration ...
-            {
-                "plugin_template",
-                -- NOTE: These will override default values
-                -- display = {
-                --     goodnight_moon = {color={fg="#FFFFFF"}, text="Custom message 1"}},
-                --     hello_world = {color={fg="#333333"}, text="Custom message 2"},
-                -- },
-            },
-        }
-    }
-}
+Use the `H` key to preserve the command you executed, either because you want it for record keeping or because you intend to modify it to re-run it.  If it is not worth preserving, then you can use the `K` key to execute the command, and then remove it from your notes.  Try this below for a survey:
+
+```
+[[ LOCAL~Admin ]]
+ps aux
+w
+ss -punta
+history
+uname -a
+id
 ```
 
+### Save output
 
-## Telescope
+Often it isn't just the command that you want to preserve in your notes, but the output as well.  Mousetrap has two ways to pull back the command output after you execute a command.  The first one is to hit send the command with the `U` keystroke.
 
-<!-- TODO: (you) - Remove this is you do not want telescope -->
-
-> Note: You can customize telescope colors here or using
-> `vim.g.plugin_template_configuration`.
-
-[telescope.nvim](https://github.com/nvim-telescope/telescope.nvim)
-```lua
-{
-    "nvim-telescope/telescope.nvim",
-    cmd = "Telescope",
-    config = function()
-        -- ... Your other configuration ...
-        require("telescope").load_extension("plugin_template")
-    end,
-    dependencies = {
-        "ColinKennedy/nvim-best-practices-plugin-template",
-        "nvim-lua/plenary.nvim",
-    },
-    version = "0.1.*",
-},
+```
+[[ LOCAL~Admin ]]
+id
 ```
 
+This works if your command output comes back relatively soon after you execute it.  Sometimes it takes longer for the output to return, but you still want it.  You also don't want to use your mouse to go grab it, because eww.  In this case, you can execute your command with `H`, and then follow up with `-` once your command output has returned.  Also notice that you may get some extra junk depending on what your `$PS1` looks like.  Feel free to modify bufferOps.lua as it pertains to your workflow.
 
-### Colors
-This plugin provides two default highlights
 
-- `PluginTemplateTelescopeEntry`
-- `PluginTemplateTelescopeSecondary`
+Try using the `U` to grab the output from the sleep command below. Watch it fail, and then call it back with `-`.
 
-Both come with default colors that should look nice. If you want to change them, here's how:
-```lua
-vim.api.nvim_set_hl(0, "PluginTemplateTelescopeEntry", {link="Statement"})
-vim.api.nvim_set_hl(0, "PluginTemplateTelescopeSecondary", {link="Question"})
+```
+[[ LOCAL~Admin ]] 
+sleep 2 && echo here we go
 ```
 
+### CTRL+C to pane
 
-# Commands
-Here are some example commands:
+Sometimes you need to CTRL+C a process.  There are two ways to do this.  Either by sending `C-c` or, in normal mode, `<leader>c`.  Try this below:
 
-<!-- TODO: (you) - You'll probably want to change all this or remove it. See -->
-<!-- plugin/plugin_template.lua for details. -->
+```
+[[ LOCAL~Admin ]] 
+python3 -m http.server
+C-c
 
-```vim
-" A typical subcommand
-:PluginTemplate hello-world say phrase "Hello, World!" " How are you?"
-:PluginTemplate hello-world say phrase "Hello, World!" --repeat=2 --style=lowercase
-
-" An example of a flag this repeatable and 3 flags, -a, -b, -c, as one dash
-:PluginTemplate arbitrary-thing -vvv -abc -f
-
-" Separate commands with completely separate, flexible APIs
-:PluginTemplate goodnight-moon count-sheep 42
-:PluginTemplate goodnight-moon read "a book"
-:PluginTemplate goodnight-moon sleep -z -z -z
+python3 -m http.server
+#Try <leader>c
 ```
 
+`C-c` is the way to do it according to tmux send-keys.  `<leader>c` is a hotkey defined in plugin/mousetrap.lua
 
-# Tests
-## Initialization
-Run this line once before calling any `busted` command
+## Windows management
 
-```sh
-eval $(luarocks path --lua-version 5.1 --bin)
+Mousetrap tries to keep you organized by allowing you to create new windows and panes without leaving your keyboard or vim session.
+
+### Create a new window
+
+First, let's create a new window by using the `NewWindow` command.  You can either supply the name of the new window as an argument, or get prompted for it if it is left empty.  Try both, and create two new windows called "First" and "Second".
+
+Special characters are not permitted for window names because it has the potential to break some Mousetrap parsing on the backend.
+
+### Navigating windows
+
+In tmux, each window created has an index number.  In default tmux settings, this is shown near the window name.  Using Mousetrap, we can navigate to a specific window by typing our leaderkey, plus the index number.  In default neovim configuration, the leader key is `\`.  Type your leaderkey 0, leaderkey 1 and leaderkey 2 to navigate between the three windows you've created.
+
+Mousetrap can do as many windows as tmux can, although you'll have to tweak the contents of mousetrap.lua to do more than 9.
+
+## Pane management
+
+As mentioned previously, panes are where the real work gets done whereas windows are used to organize larger tasks.
+
+### Create a new pane
+
+Similar to how we created a new window with the `NewWindow` command, we can create new panes with the `NewPane` command by either supplying the name as an argument, or leaving it blank and getting prompted.  In any of your three windows, create two more panes using either of these two methods.
+
+### Navigating panes
+
+Assuming you've navigated to your target window , you now need to focus on the specific pane you care about.  We can toggle through our panes using `leader key + space bar`.
+
+### Re-arranging panes
+
+Perhaps your panes are not arranged in a way that sparks joy for you.  Mousetrap allows you to do some dumb rearranging with `leader key + ctrl spacebar`.  You can do this a number for times to get your panes roughly the same size in a way that does spark joy for you. 
+
+### Pane zoom toggle
+
+Humans are not great at multi-tasking, so perhaps you'd rather not look at all of your panes at once.  You can toggle a zoom on your focused pane by typing `leaderkey+z`. Zoom back out by executing the same keystrokes.
+
+### Clear a pane
+
+When rawdogging a terminal, I like my output to remain clean, so I will frequently type `clear` or `clr`.
+
+With Mousetrap, we can use the command `:Clear`.  This is a ton of typing though, so this command is also mapped to `Ctrl a`.  Note that this mapping removes the ability to increment the number under your cursor.  These, and other keymappings can be customized in `mousetrap.lua`.
+
+
+```
+[[ LOCAL~Admin ]]
+ps -auxfww
+
+    #Now hit `Ctrl a` to reset your pane
 ```
 
+## Smart Features
 
-## Running
-Run all tests
-```sh
-# Using the package manager
-luarocks test --test-type busted
-# Or manually
-busted .
-# Or with Make
-make test
+### navigation
+
+It is all well and good to navigate around with the leader key and space bar, but if you know where you want to go, why fumble around?  Mousetrap has some smart navigation features to let you bounce around between different panes using `Ctrl+k`.  Place your cursor on the commands below and execute them with precision by typing `K` and `CTRL k`.
+
+```
+[[ LOCAL~Admin ]]
+echo LOCAL
+[[ Second~Admin ]]
+echo Second
+[[ First~Admin ]]
+echo First
+[[ Second~Admin ]]
+echo second time on second
+[[ LOCAL~Admin ]]
+echo second time on local
+[[ Second~Admin ]]
+echo third time on local
+[[ First~Admin ]]
+echo oh hey, back to first
+[[ Second~Admin ]]
+echo Okay, probably got the picture now
 ```
 
-Run test based on tags
-```sh
-busted . --tags=simple
+You might have also noticed that you got blocked if you tried to send a terminal tag.  This is by design because you probably didn't mean to do that.  If you do want to send something that looks like a terminal tag into your terminal, you can turn off the safety features by typing `MousetrapDisableSafety`. You can add more things you think are unsafe by modifying the blockSend function in `sendKeys.lua`.
+
+### Window and pane creation
+
+Manually typing out the names of your panes and windows also seems unnecessary, especially if you are doing repetitive tasks that have predictable names.  You can also use `CTRL+k` to create new windows and panes.  Place your cursor on the lines indicated below, and try it out.
+
+```
+[[ Fourth~Bar ]]
+echo put your cursor on this line and try
+
+
+[[ Fourth~Foo ]]
+echo put the cursor on the tag itself and try it
 ```
 
+Notice that it was smart enough to add the pane to the window that already existed.
 
-# Tracking Updates
-See [doc/news.txt](doc/news.txt) for updates.
+## Logging features
 
-You can watch this plugin for changes by adding this URL to your RSS feed:
+### Session command execution log
+
+Any command that we execute through Mousetrap is saved in a mousetrap.csv file located wherever we define our logDir in config.lua.
+
+Assuming you did not change the config.lua yet, the logDir is located in the home directory of the user running Mousetrap. 
+
 ```
-https://github.com/ColinKennedy/nvim-best-practices-plugin-template/commits/main/doc/news.txt.atom
+[[ LOCAL~Admin ]]
+cat ~/mousetrap/logs/mousetrap.csv
 ```
 
+It records the time the command was executed, the terminal in which it was executed, and the command that was executed.
 
-# Other Plugins
-This template is full of various features. But if your plugin is only meant to
-be a simple plugin and you don't want the bells and whistles that this template
-provides, consider instead using
-[nvim-plugin-template](https://github.com/ellisonleao/nvim-plugin-template)
+### Individual command execution log
+
+The csv is nice for a quick overview of the commands that you've executed. If you want the output, then we have to check out the command execution logs.
+
+By default, they are located at ~/mousetrap/logs/$TERMINAL_TAG
+
+```
+[[ LOCAL~Admin ]]
+ls ~/mousetrap/logs/LOCAL~Admin/
+```
+
+They are named with the Mousetrap command index number, the time of execution, the terminal tag, and the command that was executed.. If you read the yaml file, you will see that it contains the full command that was executed, the time it was executed, the target pane, the time the log was generated, and an attempt at the output.
+
+```
+[[ LOCAL~Admin ]]
+cat ~/mousetrap/logs/LOCAL~Admin/*ps*.yaml| head -n 20
+```
+
+The output recorded in the yaml will probably be imperfect because there is no programmatic way to tell if the output has been returned entirely.  Mousetrap assumes that the output is back if the user types another sendkeys command, pulls back the output with `-`, or forces a blind update by pressing `+`.
+
+### Blind updates
+
+Blind updates should be used under one of two conditions:
+
+1) You want the output to be recorded in the command execution log but do not want it sent back to your vim buffer.
+2) You are about to start raw dogging and typing commands into the terminal directly rather than use Mousetrap.  This is important because of the way that a sendkeys function is used as a trigger to update the previous command execution log file.  If you forget to use the blind update, raw dog, then start using Mousetrap again, the command execution log for the command sent before raw dogging is likely to contain your raw dogging activity.
+
+Mousetrap has a timer such that if more than a certain amount of time has passed between key presses, it will not try to update the previous command execution log. By default in `config.lua`, this `logTime` variable is 5 minutes.
+
+### last command file
+
+The last logging file is at $logDir/lastCommand.txt.  It contains what Mousetrap thinks is the output of your command.
+
+```
+[[ LOCAL~Admin ]]
+id
+cat ~/mousetrap/logs/lastCommand.txt
+```
+
+It is useful if you want to parse the output a command that you executed, but don't want to re-run the command or go into the command execution yaml file.  This log is also updated when you use either fetch output from the last command with `-` or do a blind update with `+`.
+
+## Shutting it down
+
+Once you are done, there isn't anything special you have to do.  Your scripted windows are saving everything all along, as is all of the Mousetrap logging.  If you do want to feel like you are doing something right, you can run the `StopMousetrap` command, which will kill your tmux session.
+
+# Similar projects
+
+vim slime
+https://github.com/christoomey/vim-tmux-runner
