@@ -27,7 +27,7 @@ terminal navigation and logging features.
 ==============================================================================
 2. Tutorial                                           *mousetrap-tutorial*
 
-See the README.md associated with this plugin.
+See the TUTORIAL.md associated with this plugin.
 
 
 ==============================================================================
