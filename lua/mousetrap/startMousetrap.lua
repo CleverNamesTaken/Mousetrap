@@ -26,7 +26,8 @@ function M.start ()
 
 	-- before I do this, check if it already exists
         os.execute("tmux new-session -d -c " .. workDir ..
-			" -n '" .. windowName .. "' -s Mousetrap '" .. scriptCommand .. "'")
+			" -n '" .. windowName .. "' -s Mousetrap '" .. scriptCommand .. "'" ..
+			"&& tmux set -g pane-border-status top ")
         require("mousetrap.paneOps").namePane(terminalName)
 	print("Starting Mousetrap...")
 	vim.g.commandIndex = 0

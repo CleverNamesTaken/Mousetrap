@@ -12,7 +12,7 @@ Next, we want to execute commands.  We have a safety feature to make sure we are
 whoami
 ```
 
-Nothing happened, because you have no tags.  Try again on the line below:
+Nothing happened, because you have no terminal tags.  Try again on the line below:
 
 ```
 [[ LOCAL~Admin ]]
@@ -48,7 +48,7 @@ Often it isn't just the command that you want to preserve in your notes, but the
 id
 ```
 
-This works if your command output comes back relatively soon after you execute it.  Sometimes it takes longer for the output to return, but you still want it.  You also don't want to use your mouse to go grab it, because eww.  In this case, you can execute your command with `H`, and then follow up with `-` once your command output has returned.  Also notice that you may get some extra junk depending on what your `$PS1` looks like.  Feel free to modify bufferOps.lua as it pertains to your workflow.
+This works if your command output comes back relatively soon after you execute it.  Sometimes it takes longer for the output to return, but you still want it.  You also don't want to use your mouse to go grab it, because eww.  In this case, you can execute your command with `H`, and then follow up with `-` once your command output has returned.  Also notice that you may get some extra junk depending on what your `$PS1` looks like.  Feel free to modify `mousetrap/bufferOps.lua` as it pertains to your workflow.
 
 
 Try using the `U` to grab the output from the sleep command below. Watch it fail, and then call it back with `-`.
@@ -71,7 +71,7 @@ python3 -m http.server
 #Try <leader>c
 ```
 
-`C-c` is the way to do it according to tmux send-keys.  `<leader>c` is a hotkey defined in plugin/mousetrap.lua
+`C-c` is the way to do it according to tmux send-keys.  `<leader>c` is a hotkey defined in `plugin/mousetrap.lua`
 
 ## Windows management
 
@@ -87,7 +87,7 @@ Special characters are not permitted for window names because it has the potenti
 
 In tmux, each window created has an index number.  In default tmux settings, this is shown near the window name.  Using Mousetrap, we can navigate to a specific window by typing our leaderkey, plus the index number.  In default neovim configuration, the leader key is `\`.  Type your leaderkey 0, leaderkey 1 and leaderkey 2 to navigate between the three windows you've created.
 
-Mousetrap can do as many windows as tmux can, although you'll have to tweak the contents of mousetrap.lua to do more than 9.
+Mousetrap can do as many windows as tmux can, although you'll have to tweak the contents of `plugin/mousetrap.lua` to do more than 9.
 
 ## Pane management
 
@@ -113,7 +113,7 @@ Humans are not great at multi-tasking, so perhaps you'd rather not look at all o
 
 When rawdogging a terminal, I like my output to remain clean, so I will frequently type `clear` or `clr`.
 
-With Mousetrap, we can use the command `:Clear`.  This is a ton of typing though, so this command is also mapped to `Ctrl a`.  Note that this mapping removes the ability to increment the number under your cursor.  These, and other keymappings can be customized in `mousetrap.lua`.
+With Mousetrap, we can use the command `:Clear`.  This is a ton of typing though, so this command is also mapped to `Ctrl a`.  Note that this mapping removes the ability to increment the number under your cursor.  These, and other keymappings can be customized in `plugin/mousetrap.lua`.
 
 
 ```
@@ -148,7 +148,7 @@ echo oh hey, back to first
 echo Okay, probably got the picture now
 ```
 
-You might have also noticed that you got blocked if you tried to send a terminal tag.  This is by design because you probably didn't mean to do that.  If you do want to send something that looks like a terminal tag into your terminal, you can turn off the safety features by typing `MousetrapDisableSafety`. You can add more things you think are unsafe by modifying the blockSend function in `sendKeys.lua`.
+You might have also noticed that you got blocked if you tried to send a terminal tag.  This is by design because you probably didn't mean to do that.  If you do want to send something that looks like a terminal tag into your terminal, you can turn off the safety features by typing `MousetrapSafetyToggle`. You can add more things you think are unsafe by modifying the blockSend function in `mousetrap/sendKeys.lua`.
 
 ### Window and pane creation
 
@@ -169,9 +169,9 @@ Notice that it was smart enough to add the pane to the window that already exist
 
 ### Session command execution log
 
-Any command that we execute through Mousetrap is saved in a mousetrap.csv file located wherever we define our logDir in config.lua.
+Any command that we execute through Mousetrap is saved in a mousetrap.csv file located wherever we define our logDir in `mousetrap/config.lua`.
 
-Assuming you did not change the config.lua yet, the logDir is located in the `work` directory within the home directory of the user running Mousetrap. 
+Assuming you did not change the `mousetrap/config.lua` yet, the logDir is located in the `work` directory within the home directory of the user running Mousetrap. 
 
 ```
 [[ LOCAL~Admin ]]
@@ -207,7 +207,7 @@ Blind updates should be used under one of two conditions:
 1) You want the output to be recorded in the command execution log but do not want it sent back to your vim buffer.
 2) You are about to start raw dogging and typing commands into the terminal directly rather than use Mousetrap.  This is important because of the way that a sendkeys function is used as a trigger to update the previous command execution log file.  If you forget to use the blind update, raw dog, then start using Mousetrap again, the command execution log for the command sent before raw dogging is likely to contain your raw dogging activity.
 
-Mousetrap has a timer such that if more than a certain amount of time has passed between key presses, it will not try to update the previous command execution log. By default in `config.lua`, this `logTime` variable is 5 minutes.
+Mousetrap has a timer such that if more than a certain amount of time has passed between key presses, it will not try to update the previous command execution log. By default in `mousetrap/config.lua`, this `logTime` variable is 5 minutes.
 
 ### last command file
 

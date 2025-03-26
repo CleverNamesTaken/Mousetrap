@@ -60,6 +60,10 @@ function M.sendKeys(consume,returnOutput,currentLine)
 	-- Grab the line count of the window before I send it
 	local scriptedWindow = require("mousetrap.config").options.workDir .. '/scripts/' .. targetPane .. '.script'
 	local paneLineCount = require("mousetrap.stringParsing").linecount(scriptedWindow) + 1
+	-- Check if the last character sent is a semi-colon
+	if string.sub(currentLine,-1) == ';' then
+		currentLine = string.sub(currentLine,1,-2) .. "\\;"
+	end
 	local tmuxCommand = string.format([[tmux send-keys -t Mousetrap: %s Enter]], vim.fn.shellescape(currentLine))
 	os.execute(tmuxCommand)
 	-- log it
