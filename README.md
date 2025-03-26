@@ -11,7 +11,7 @@ When conducting red team assessments, I wanted to improve my efficiency and logg
 1) Stay focused on the objective at hand by remaining in vim and sending my commands to tmux windows.
 2) Stay consistent by using red team playbooks developed and stored as Ultisnips snippets.
 3) Log my activities by parsing the output of my tmux and scripted windows, and saving them off as yaml files.
-4) Quickly reconstruct my activities by logging all commands send through vim in a csv.
+4) Quickly reconstruct my activities by logging all commands sent through vim in a csv.
 
 # Installation
 
