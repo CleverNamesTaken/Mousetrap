@@ -33,9 +33,10 @@ See TUTORIAL.md
 # TODO
 
 Figure out plugin managers.
-[] packer.nvim
-[] vim-plug
-[] lazy.nvim
+
+- packer.nvim
+- vim-plug
+- lazy.nvim
 
 # Similar projects
 
