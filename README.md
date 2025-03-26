@@ -16,12 +16,13 @@ When conducting red team assessments, I wanted to improve my efficiency and logg
 # Installation
 
 I don't really enjoy plugin managers, so here is how you do it manually:
+
 1) Pull down repo
 2) Move `lua` folder to `~/.config/nvim`
 3) Move `plugin` folder to `~/.config/nvim`
-4) Add `require("mousetrap")` to `init.lua`
-5) Install dependencies
-`apt install tmux neovim -y`
+4) Move `doc` folder to `~/.config/nvim`
+5) Add `require("mousetrap")` to `init.lua`
+6) Install dependencies:  `apt install tmux neovim -y`
 
 Running `mousetrapInstall.sh` will do this as well.
 
@@ -32,9 +33,11 @@ See TUTORIAL.md
 # TODO
 
 Figure out plugin managers.
-
-Start tmux with some nicer settings so you can see the name of the panes.
+[] packer.nvim
+[] vim-plug
+[] lazy.nvim
 
 # Similar projects
 
-[vim slime](https://github.com/christoomey/vim-tmux-runner)
+- [vim slime](https://github.com/jpalardy/vim-slime)
+- [vim-tmux-runner](https://github.com/christoomey/vim-tmux-runner)
