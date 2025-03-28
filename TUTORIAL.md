@@ -1,6 +1,6 @@
 # Tutorial
 
-Open up two terminal windows.  In one, open up this README is Neovim, and execute the command `StartMousetrap`.  In the second terminal window, execute the command `tmux attach -t Mousetrap`
+Open up two terminal windows.  In one, open up this README in Neovim, and execute the command `StartMousetrap`.  In the second terminal window, execute the command `tmux attach -t Mousetrap`
 
 ## Send keys
 

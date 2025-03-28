@@ -47,10 +47,12 @@ end
 function M.cleanText(string)
 	-- strip out color codes
 	local cleanString =  string:gsub('\27%[%d+;*%d*m','')
+	--local cleanString = string:gsub("\\x1B(?:[a-zA-Z0-9]*|[0-9]+m", "")
 	-- strip out carriage returns
-	cleanString =  cleanString:gsub('\r','')
+	cleanString = cleanString:gsub('\r','')
 	-- strip out ansi escapes
-	cleanString =  cleanString:gsub('\27%[%?2004[hl]','')
+	cleanString = cleanString:gsub('\27%[%?2004[hl]','')
+	cleanString = cleanString:gsub("[\27\155][][()#;?%d]*[A-PRZcf-ntqry=><~]", "")
 	return cleanString
 end
 return M
