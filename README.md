@@ -15,6 +15,12 @@ When conducting red team assessments, I wanted to improve my efficiency and logg
 
 # Installation
 
+However you choose to install, tmux and neovim are dependencies.
+
+```
+apt install tmux neovim -y
+```
+
 * with [lazy.nvim](https://github.com/folke/lazy.nvim)
 
 ```
@@ -33,7 +39,7 @@ echo 'vim.api.nvim_command "packadd Mousetrap"' >> ~/.config/nvim/init.lua
 
 * Manual, offline-ish
 
-Need to have tmux, neovim pre-installed, pull down this repo, and then run `mousetrapInstall.sh` from the Mousetrap directory.
+Pull down this repo, and then run `mousetrapInstall.sh` from the Mousetrap directory.
 
 # Tutorial
 
