@@ -184,7 +184,7 @@ It records the time the command was executed, the terminal in which it was execu
 
 The csv is nice for a quick overview of the commands that you've executed. If you want the output, then we have to check out the command execution logs.
 
-By default, they are located at ~/mousetrap/logs/$TERMINAL_TAG
+By default, they are located at `~/mousetrap/logs/$TERMINAL_TAG`.
 
 ```
 [[ LOCAL~Admin ]]
@@ -211,7 +211,7 @@ Mousetrap has a timer such that if more than a certain amount of time has passed
 
 ### last command file
 
-The last logging file is at $logDir/lastCommand.txt.  It contains what Mousetrap thinks is the output of your command.
+The last logging file is at `$logDir/lastCommand.txt.`  It contains what Mousetrap thinks is the output of your command.
 
 ```
 [[ LOCAL~Admin ]]

@@ -7,7 +7,7 @@ local M = {}
 local homeDir = os.getenv("HOME")
 M.options = {
 	workDir = homeDir .. "/work/mousetrap/" ,
-	logDir = homeDir .. "/work/mousetrap/logs/" ,
+	logDir = workDir .. "/logs/" ,
 	logTime = 5
 }
 

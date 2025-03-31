@@ -15,28 +15,59 @@ When conducting red team assessments, I wanted to improve my efficiency and logg
 
 # Installation
 
-I don't really enjoy plugin managers, so here is how you do it manually:
+* with [lazy.nvim](https://github.com/folke/lazy.nvim)
 
-1) Pull down repo
-2) Move `lua` folder to `~/.config/nvim`
-3) Move `plugin` folder to `~/.config/nvim`
-4) Move `doc` folder to `~/.config/nvim`
-5) Add `require("mousetrap")` to `init.lua`
-6) Install dependencies:  `apt install tmux neovim -y`
+```
+{
+  'CleverNamesTaken/Mousetrap',
+}
+```
 
-Running `mousetrapInstall.sh` will do this as well.
+* Bootstrap install
+
+```
+mkdir -p ~/.local/share/nvim/site/pack/packer/opt/
+git clone https://github.com/CleverNamesTaken/Mousetrap ~/.local/share/nvim/site/pack/packer/opt/Mousetrap
+echo 'vim.api.nvim_command "packadd Mousetrap"' >> ~/.config/nvim/init.lua
+```
+
+* Manual, offline-ish
+
+Need to have tmux, neovim pre-installed, pull down this repo, and then run `mousetrapInstall.sh` from the Mousetrap directory.
 
 # Tutorial
 
 See TUTORIAL.md
 
+# Customize your settings
+
+The default settings are quite reasonable, but the things that you might be interested in changing are as follows:
+
+## Log settings
+
+Mousetrap has three settings in `mousetrap/config.lua`:
+- workDir : This is where the mousetrap scripts.  Scripts is where scripted window files will be created. Default setting is `~/work/mousetrap`.
+- logDir : This is where the `lastCommand` and directories for each terminal will be created.  Default setting is `~/work/mousetrap/logs/`.
+- logTime : This is how many minutes that Mousetrap will allow you wait before giving up on trying to re-update your command output yaml files or `lastCommand`.  By default, this is 5 minutes.
+
+## Keybindings
+
+Keybindings can be modified in `plugins/mousetrap.lua`.  There are a lot here, and default Mousetrap keybindings stomp on `<c-a>` to clear a terminal.  The other non-leader keybinds it uses are as follows (all in normal mode):
+
+- `<c-k>`
+- `<C-s>`
+- `+`
+- `-`
+- `H`
+- `K`
+- `U`
+
 # TODO
 
-Figure out plugin managers.
+A couple of known bugs:
 
-- packer.nvim
-- vim-plug
-- lazy.nvim
+- If you try to pull back too much data at once, it might freeze up your nvim.  Put in a check to tell you that you are trying to pull back too much and that it is safer to just blind update and view `lastCommand.txt`.
+- If you drop into a docker container (and presumably other types of shells out there), your pane title might change.  This will break Mousetrap's ability to send commands, so implement some sort of way to revert the pane title back.
 
 # Similar projects
 
