@@ -24,7 +24,7 @@ apt install tmux neovim -y
 * with [lazy.nvim](https://github.com/folke/lazy.nvim)
 
 ```
-{
+return {
   'CleverNamesTaken/Mousetrap',
 }
 ```
@@ -52,9 +52,9 @@ The default settings are quite reasonable, but the things that you might be inte
 ## Log settings
 
 Mousetrap has three settings in `mousetrap/config.lua`:
-- workDir : This is where the mousetrap scripts.  Scripts is where scripted window files will be created. Default setting is `~/work/mousetrap`.
-- logDir : This is where the `lastCommand` and directories for each terminal will be created.  Default setting is `~/work/mousetrap/logs/`.
-- logTime : This is how many minutes that Mousetrap will allow you wait before giving up on trying to re-update your command output yaml files or `lastCommand`.  By default, this is 5 minutes.
+- workDir : Where scripted window files will be created. Default setting is `~/work/mousetrap`.
+- logDir : This is where `lastCommand.txt` and directories for each terminal will be created.  Default setting is `~/work/mousetrap/logs/`.
+- logTime : This is how many minutes that Mousetrap will allow you wait before giving up on trying to re-update your command output yaml files or `lastCommand.txt`.  By default, this is 5 minutes.
 
 ## Keybindings
 
@@ -70,7 +70,7 @@ Keybindings can be modified in `plugins/mousetrap.lua`.  There are a lot here, a
 
 # TODO
 
-A couple of known bugs:
+Known bugs:
 
 - If you try to pull back too much data at once, it might freeze up your nvim.  Put in a check to tell you that you are trying to pull back too much and that it is safer to just blind update and view `lastCommand.txt`.
 - If you drop into a docker container (and presumably other types of shells out there), your pane title might change.  This will break Mousetrap's ability to send commands, so implement some sort of way to revert the pane title back.
