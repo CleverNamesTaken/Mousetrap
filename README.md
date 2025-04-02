@@ -32,14 +32,14 @@ return {
 * Bootstrap install
 
 ```
-mkdir -p ~/.local/share/nvim/site/pack/packer/opt/
-git clone https://github.com/CleverNamesTaken/Mousetrap ~/.local/share/nvim/site/pack/packer/opt/Mousetrap
-echo 'vim.api.nvim_command "packadd Mousetrap"' >> ~/.config/nvim/init.lua
+mkdir -p ~/.config/nvim
+sudo apt install tmux neovim -y
+git clone https://github.com/CleverNamesTaken/Mousetrap 
+cp -r Mousetrap/lua ~/.config/nvim
+cp -r Mousetrap/plugin ~/.config/nvim
+cp -r Mousetrap/doc  ~/.config/nvim
+echo 'require("mousetrap")' >> ~/.config/nvim/init.lua
 ```
-
-* Manual, offline-ish
-
-Pull down this repo, and then run `mousetrapInstall.sh` from the Mousetrap directory.
 
 # Tutorial
 
@@ -74,8 +74,11 @@ Known bugs:
 
 - If you try to pull back too much data at once, it might freeze up your nvim.  Put in a check to tell you that you are trying to pull back too much and that it is safer to just blind update and view `lastCommand.txt`.
 - If you drop into a docker container (and presumably other types of shells out there), your pane title might change.  This will break Mousetrap's ability to send commands, so implement some sort of way to revert the pane title back.
+- Depending on your your shell's `$PS1`, you might need to comment out line 48 of `lua/mousetrap/logging.lua`.  The issue here is because some shells give you more newlines than others after you execute a command.
+- Sending a line starting with `-- ` confuses Mousetrap.
 
 # Similar projects
 
 - [vim slime](https://github.com/jpalardy/vim-slime)
 - [vim-tmux-runner](https://github.com/christoomey/vim-tmux-runner)
+- [nvim-terminal-send](https://github.com/max607/nvim-terminal-send)
