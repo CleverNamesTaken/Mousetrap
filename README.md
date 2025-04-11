@@ -51,10 +51,11 @@ The default settings are quite reasonable, but the things that you might be inte
 
 ## Log settings
 
-Mousetrap has three settings in `mousetrap/config.lua`:
+Mousetrap has four settings in `mousetrap/config.lua`:
 - workDir : Where scripted window files will be created. Default setting is `~/work/mousetrap`.
 - logDir : This is where `lastCommand.txt` and directories for each terminal will be created.  Default setting is `~/work/mousetrap/logs/`.
 - logTime : This is how many minutes that Mousetrap will allow you wait before giving up on trying to re-update your command output yaml files or `lastCommand.txt`.  By default, this is 5 minutes.
+- grabLineMax : This is the number of lines that mousetrap will attempt to grab for a manual grab of the output before it blocks you. If you try to grab too much output and put it in your buffer, it is possible your session will lock up.  Instead, mousetrap will prompt you to open up `lastCommand.txt` in a new tab.  By default, this value is 100 lines.
 
 ## Keybindings
 
@@ -72,10 +73,8 @@ Keybindings can be modified in `plugins/mousetrap.lua`.  There are a lot here, a
 
 Known bugs:
 
-- If you try to pull back too much data at once, it might freeze up your nvim.  Put in a check to tell you that you are trying to pull back too much and that it is safer to just blind update and view `lastCommand.txt`.
 - If you drop into a docker container (and presumably other types of shells out there), your pane title might change.  This will break Mousetrap's ability to send commands, so implement some sort of way to revert the pane title back.
 - Depending on your your shell's `$PS1`, you might need to comment out line 48 of `lua/mousetrap/logging.lua`.  The issue here is because some shells give you more newlines than others after you execute a command.
-- Sending a line starting with `-- ` confuses Mousetrap.
 
 # Similar projects
 

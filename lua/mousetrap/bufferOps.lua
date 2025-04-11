@@ -11,13 +11,40 @@ end
 function M.grabLastOutput()
 	-- look in the scripted window to see what was added last time
 	local logDir = require("mousetrap.config").options.logDir
-	local lastCommandFile = logDir .. "/lastCommand.txt"
-	for line in io.lines(lastCommandFile) do
-		local cleanLine = require("mousetrap.stringParsing").cleanText(line)
-		M.writeLine(tostring(cleanLine))
+	local grabLineMax = require("mousetrap.config").options.grabLineMax
+	local lastCommandFile = io.open(logDir .. "/lastCommand.txt","r")
+	if lastCommandFile then
+		local lines = 0
+		for _ in lastCommandFile:lines() do
+			lines = lines + 1
+		end
+		-- If there are too many lines, let's not grab it.
+		if lines > 3 then
+			M.newTab()
+			return
+		else
+			for line in lastCommandFiles:lines() do
+				local cleanLine = require("mousetrap.stringParsing").cleanText(line)
+				M.writeLine(tostring(cleanLine))
+			end
+		end
 	end
-	return
 end
+
+function M.newTab()
+    local choices = { "Yes", "No" }
+    local logDir = require("mousetrap.config").options.logDir
+    local grabLineMax = require("mousetrap.config").options.grabLineMax
+    vim.ui.select(choices, { prompt = "You tried to pull back more than " .. grabLineMax .. " lines into your buffer.  Do you want to open lastCommand.txt in a new tab?" }, function(choice)
+        if choice == "Yes" then
+                vim.cmd("tabnew " .. logDir .. "/lastCommand.txt")
+        else
+            print("Cancelled.")
+        end
+    end)
+    return
+end
+
 
 function M.timestamp()
 	local time = os.date ("%Y-%m-%d %H:%M:%S %Z")

@@ -8,7 +8,8 @@ local homeDir = os.getenv("HOME")
 M.options = {
 	workDir = homeDir .. "/work/mousetrap/",
 	logDir = homeDir .. "/work/mousetrap/logs/",
-	logTime = 5
+	logTime = 5,
+	grabLineMax = 100
 }
 
 return M

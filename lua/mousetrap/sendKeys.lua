@@ -64,7 +64,8 @@ function M.sendKeys(consume,returnOutput,currentLine)
 	if string.sub(currentLine,-1) == ';' then
 		currentLine = string.sub(currentLine,1,-2) .. "\\;"
 	end
-	local tmuxCommand = string.format([[tmux send-keys -t Mousetrap: %s Enter]], vim.fn.shellescape(currentLine))
+	--funky prefix of -- to make sure that lines beginning with - are sent
+	local tmuxCommand = string.format([[tmux send-keys -t Mousetrap: -- %s Enter]], vim.fn.shellescape(currentLine))
 	os.execute(tmuxCommand)
 	-- log it
 	local time = os.date ("%Y-%m-%d_%H-%M-%S_%Z")
