@@ -11,7 +11,6 @@ end
 function M.grabLastOutput()
 	-- look in the scripted window to see what was added last time
 	local logDir = require("mousetrap.config").options.logDir
-	local grabLineMax = require("mousetrap.config").options.grabLineMax
 	local lastCommandFile = io.open(logDir .. "/lastCommand.txt","r")
 	if lastCommandFile then
 		local lines = 0
@@ -19,11 +18,13 @@ function M.grabLastOutput()
 			lines = lines + 1
 		end
 		-- If there are too many lines, let's not grab it.
-		if lines > 3 then
+		local grabLineMax = require("mousetrap.config").options.grabLineMax
+		if lines > grabLineMax then
 			M.newTab()
 			return
 		else
-			for line in lastCommandFiles:lines() do
+			local lastCommandFile = io.open(logDir .. "/lastCommand.txt","r")
+			for line in lastCommandFile:lines() do
 				local cleanLine = require("mousetrap.stringParsing").cleanText(line)
 				M.writeLine(tostring(cleanLine))
 			end

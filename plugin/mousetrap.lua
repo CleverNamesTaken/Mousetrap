@@ -3,6 +3,7 @@ vim.api.nvim_create_user_command("StartMousetrap", require("mousetrap").start, {
 vim.api.nvim_create_user_command("StopMousetrap", require("mousetrap").stop, {})
 vim.api.nvim_create_user_command("Clear", require("mousetrap").resetPane, {})
 vim.api.nvim_create_user_command("MousetrapSafetyToggle", require("mousetrap").safetyToggle, {})
+vim.api.nvim_create_user_command("MousetrapOutputCut", require("mousetrap").OutputCut, {})
 vim.api.nvim_create_user_command("NewWindow", function(args) require("mousetrap").newWindow(args.args) end,
 	{ nargs = "?" })
 vim.api.nvim_create_user_command("NewPane", function(args) require("mousetrap").newPane(args.args) end, { nargs = "?" })

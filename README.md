@@ -71,10 +71,11 @@ Keybindings can be modified in `plugins/mousetrap.lua`.  There are a lot here, a
 
 # TODO
 
+- Add documentation on OutputCut
+
 Known bugs:
 
 - If you drop into a docker container (and presumably other types of shells out there), your pane title might change.  This will break Mousetrap's ability to send commands, so implement some sort of way to revert the pane title back.
-- Depending on your your shell's `$PS1`, you might need to comment out line 48 of `lua/mousetrap/logging.lua`.  The issue here is because some shells give you more newlines than others after you execute a command.
 
 # Similar projects
 

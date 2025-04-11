@@ -44,11 +44,37 @@ function M.getOutput(targetPane,paneLineCount)
 			table.insert(output,line)
 		end
 	end
-	-- I think the last line is usually garbage, so I'm going to remove it...
-	output[#output] = nil
-	return output
+	-- Allow parsing for the number of lines to remove
+	-- output[#output] = nil
+	local trimmed_output = {}
+	if vim.g.MousetrapOutputCut == nil then
+		cutNumber = 1
+	else
+		cutNumber = tonumber(vim.g.MousetrapOutputCut)
+	end
 
+	for i = 1, #output - cutNumber + 1 do
+	    table.insert(trimmed_output, output[i])
+	end
+	output = trimmed_output
+	return output
 end
+
+--Prompt user for how many lines to cut
+function M.OutputCut()
+	--prompt user
+	while true do
+	local trimNumber = vim.fn.input({ prompt = 'Enter the number of lines to cut from command output:' })
+	if tonumber(trimNumber) then
+		if tonumber(trimNumber) >= 0 then
+			vim.g.MousetrapOutputCut = trimNumber
+			return
+		end
+	end
+	print("\nMust use a number greater than or equal to 0.")
+	end
+end
+
 function M.writeYaml(currentLine,time,targetPane,logDir,paneLineCount)
 	-- make sure the directory structure exists
         local paneDir = logDir .. "/" .. targetPane

@@ -10,6 +10,11 @@ end
 
 
 function M.start ()
+
+	if require("mousetrap.init").checkRunning() then
+		print("Mousetrap is already running")
+		return
+	end
 	local workDir = require("mousetrap.config").options.workDir
         local scriptDir = workDir .. "/scripts"
 
