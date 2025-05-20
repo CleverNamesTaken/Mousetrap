@@ -1,10 +1,8 @@
 local M = {}
 
 function M.smartPane()
-	--vim.cmd('normal! j')
 	-- find the last terminal tag, including where I am right now
 	local lastTag = require("mousetrap.bufferOps").findLastTag()
-	--vim.cmd('normal! k')
 	-- compare it to my current tag
 	local activePane = M.activePane()
 	-- if it is the same, do nothing
@@ -15,6 +13,9 @@ function M.smartPane()
 			os.execute("tmux select-window -t Mousetrap:" .. windowId)
 			-- removing mousetrap session information...  I think this should work regardless.
 			os.execute("tmux select-pane -t ".. paneId)
+			return
+		else
+			print("No pane name provided.  Try appending '~PaneName' to your terminal tag.")
 			return
 		end
 		vim.ui.input({ prompt = 'A pane called "' .. lastTag ..
