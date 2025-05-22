@@ -14,7 +14,7 @@ function M.smartPane()
 			-- removing mousetrap session information...  I think this should work regardless.
 			os.execute("tmux select-pane -t ".. paneId)
 			return
-		else
+		--else
 			--print("No pane name provided.  Try appending '~PaneName' to your terminal tag.")
 			--return
 		end
