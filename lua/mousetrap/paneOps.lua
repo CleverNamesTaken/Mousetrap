@@ -15,8 +15,8 @@ function M.smartPane()
 			os.execute("tmux select-pane -t ".. paneId)
 			return
 		else
-			print("No pane name provided.  Try appending '~PaneName' to your terminal tag.")
-			return
+			--print("No pane name provided.  Try appending '~PaneName' to your terminal tag.")
+			--return
 		end
 		vim.ui.input({ prompt = 'A pane called "' .. lastTag ..
 				'" does not exist.  Press Enter to create it, or anything else to return.\n'},
