@@ -14,12 +14,9 @@ function M.smartPane()
 			-- removing mousetrap session information...  I think this should work regardless.
 			os.execute("tmux select-pane -t ".. paneId)
 			return
-		else
-			print("No pane name provided.  Try appending '~PaneName' to your terminal tag.")
-			return
 		end
 		vim.ui.input({ prompt = 'A pane called "' .. lastTag ..
-				'" does not exist.  Press Enter to create it, or anything else to return.\n'},
+				'" does not exist.  Press Enter or Esc to create it, or anything else to return.\n'},
 			function(input)
 			if input == nil or input == '' then
         -- If input is nil or empty (Enter pressed), create the pane
@@ -34,6 +31,10 @@ function M.smartPane()
 end
 
 function M.smartPaneCreate(targetTerminal)
+	-- Check if the pane name has the elements we want
+	if not require("mousetrap.stringParsing").checkPaneName(targetTerminal) then
+		return
+	end
 	local targetWindow = require("mousetrap.stringParsing").split(targetTerminal,"~",1)
 	local targetPane = require("mousetrap.stringParsing").split(targetTerminal,"~",2)
 	local windowId = require("mousetrap.windowOps").searchWindow(targetWindow)
@@ -138,9 +139,6 @@ function M.newPane(windowName,paneName)
         local vim_pwd = vim.fn.getcwd()
         os.execute("tmux split-window -t Mousetrap: -c " .. vim_pwd .. " '" .. scriptCommand .. "'")
         M.namePane(terminalName)
-	-- could not find a way to notify without causing me to press enter.
-	--vim.api.nvim_echo({{"New pane created: " .. terminalName, "Normal"}}, false, {})
-	--vim.notify("New pane created with notification: " .. terminalName, vim.log.levels.INFO, {})
         return
 end
 

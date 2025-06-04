@@ -21,7 +21,7 @@ whoami
 
 This worked because we have a terminal tag above the command.  The format of a terminal tag is `[[ <WindowName>~<PaneName> ]]`. Use `CTRL+s` to insert a terminal tag while in normal mode.  This is a time stamp for where and when you executed a command.
 
-The philosphy behind terminal tag naming is that each window is named according to the major task we want to accomplish, and the pane is named based on the subtask needed to support the major task. Do what works for you.
+The philosophy behind terminal tag naming is that each window is named according to the major task we want to accomplish, and the pane is named based on the subtask needed to support the major task. Do what works for you.
 
 It is good to get into the habit of timestamping your commands with the terminal tag to make it easier to follow along and retrace your steps.
 

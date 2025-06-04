@@ -3,6 +3,7 @@ local M = {}
 
 function M.stop ()
 	os.execute("tmux kill-session -t Mousetrap")
+	print("Mousetrap killed")
 end
 
 
