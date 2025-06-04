@@ -77,6 +77,11 @@ Known bugs:
 
 - If you drop into a docker container (and presumably other types of shells out there), your pane title might change.  This will break Mousetrap's ability to send commands, so implement some sort of way to revert the pane title back.
 
+Limitations:
+
+- After creating a pane, Mousetrap will not allow you rename it.  This is because the name of the terminal is how Mousetrap knows to find the script for reading output.
+- Terminal names must follow this format <WINDOW>~<PANE>.  Alphanumeric characters and periods can be used in the window and pane titles, but nothing else.
+
 # Similar projects
 
 - [vim slime](https://github.com/jpalardy/vim-slime)
