@@ -2,7 +2,7 @@
 
 Mousetrap is a Neovim plugin that uses tmux and scripted windows to allow users to execute complex terminal operations by keeping your hands on the keyboard and off of the mouse.  The major goal is to reduce cognitive load by working in a nvim instance and actively documenting your actions as you operate.
 
-Mousetrap is similar to vim-slime, but more tmux specific with better terminal navigation and logging features.  Credit to Erik Falor's talk [Vim Muggle to Wizard in 10 Easy Steps](https://youtube.com/watch?v=-7RSVclyOEg) for unlocking the Wizardry of vim.
+Mousetrap is similar to vim-slime, but more tmux specific with better terminal navigation and logging features.  Credit to Erik Falor's talk [Vim Muggle to Wizard in 10 Easy Steps](https://infocon.org/cons/Security%20BSides/BSides%20Salt%20Lake%20City/BSides%20Salt%20Lake%20City%202015/From%20Vim%20Muggle%20to%20Wizard%20in%2010%20Easy%20Steps%20-%20Erik%20Falor.mp4) for unlocking the Wizardry of vim.
 
 # Why use Mousetrap?
 
