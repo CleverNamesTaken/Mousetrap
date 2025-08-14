@@ -27,7 +27,7 @@ It is good to get into the habit of timestamping your commands with the terminal
 
 ### Consumption
 
-Use the `H` key to preserve the command you executed, either because you want it for record keeping or because you intend to modify it to re-run it.  If it is not worth preserving, then you can use the `K` key to execute the command, and then remove it from your notes.  Try this below for a survey:
+Use the `H` key to preserve the command you executed, either because you want it for record keeping or because you intend to modify it for re-execution.  If it is not worth preserving, then you can use the `K` key to execute the command, and then remove it from your notes.  Try this below for a survey:
 
 ```
 [[ LOCAL~Admin ]]
@@ -60,7 +60,7 @@ sleep 2 && echo here we go
 
 ### CTRL+C to pane
 
-Sometimes you need to CTRL+C a process.  There are two ways to do this.  Either by sending `C-c` or, in normal mode, `<leader>c`.  Try this below:
+Sometimes you need to CTRL+C a process.  There are two ways to do this.  Either by sending `C-c` or, in normal mode, `<leader>c`.  Try the commands below:
 
 ```
 [[ LOCAL~Admin ]] 
