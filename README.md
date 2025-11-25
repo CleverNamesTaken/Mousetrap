@@ -75,7 +75,7 @@ Keybindings can be modified in `plugins/mousetrap.lua`.  There are a lot here, a
 
 Known bugs:
 
-- Script files sometimes write to /tmp, but I cannot reliably cause this to happen to fix
+- Script files sometimes write to /tmp, but I have not been able to reliably cause this to happen to investigate further.
 
 
 Limitations:
