@@ -76,7 +76,7 @@ function M.newWindow(windowName,paneName)
         os.execute("tmux new-window -t Mousetrap: -c " .. vim_pwd ..
 			" -n '" .. windowName .. "' '" .. scriptCommand .. "'")
         require("mousetrap.paneOps").namePane(terminalName)
-	--vim.api.nvim_echo({{"New window created: " .. windowName, "Normal"}}, false, {})
+        require("mousetrap.paneOps").createYaml()
         return
 end
 return M

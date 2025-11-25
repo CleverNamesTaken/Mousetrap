@@ -7,14 +7,25 @@ function M.smartPane()
 	local activePane = M.activePane()
 	-- if it is the same, do nothing
 	if activePane ~= lastTag then
-		-- check if lastTag exists
-		local windowId,paneId = M.searchPane(lastTag)
-		if paneId then
-			os.execute("tmux select-window -t Mousetrap:" .. windowId)
-			-- removing mousetrap session information...  I think this should work regardless.
-			os.execute("tmux select-pane -t ".. paneId)
-			return
+
+		-- Look through our tags and go to the paneId
+		local file = assert(io.open("/tmp/.mousetrap.yaml", "r"))
+		for line in file:lines() do
+			local s = line:match("^%s*(.-)%s*$")
+			local key, value = s:match("^(%S+)%s*:%s*(.+)$")
+			if value == lastTag then
+				-- first lets go to the window
+				local windowId = value:match("^(.-)~")
+				os.execute("tmux select-window -t Mousetrap:" .. windowId)
+				-- removing mousetrap session information...  This could introduce an issue if there are multiple sessions open
+				os.execute("tmux select-pane -t " .. key)
+				-- then focus on that pane
+				return
+			end
 		end
+		file:close()
+
+		--If we do not have a matching pane title already...
 		vim.ui.input({ prompt = 'A pane called "' .. lastTag ..
 				'" does not exist.  Press Enter or Esc to create it, or anything else to return.\n'},
 			function(input)
@@ -27,6 +38,8 @@ function M.smartPane()
 			end
 		end)
 	end
+
+	--If we got here, then the activePane is the same as before, so we can just keep rolling.
 	return
 end
 
@@ -54,6 +67,20 @@ end
 
 function M.searchPane(targetPane)
 	-- list all the panes
+
+	local file = assert(io.open("/tmp/.mousetrap.yaml", "r"))
+	for line in file:lines() do
+		local s = line:match("^%s*(.-)%s*$")
+		local key, value = s:match("^(%S+)%s*:%s*(.+)$")
+		if value == targetPane then
+			os.execute("tmux select-pane -t Mousetrap: -T '" .. value .. "'" )
+			break
+		end
+	end
+	file:close()
+
+
+
 	local tmuxCommand = 'tmux list-panes -t Mousetrap -s -F "#{pane_title},#{window_id},#{pane_id}"'
         local f = io.popen(tmuxCommand, "r")
         local output = f:read("*a")
