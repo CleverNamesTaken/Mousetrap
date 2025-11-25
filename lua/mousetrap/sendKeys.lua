@@ -87,6 +87,9 @@ function M.sendKeys(consume,returnOutput,currentLine)
 end
 
 function M.sendSafe(consume,returnOutput)
+	--check if the pane name changed
+	
+	require("mousetrap.paneOps").checkPaneName()
 	-- grab the current line
 	local currentLine = vim.api.nvim_get_current_line()
 	if vim.g.MousetrapSafety == false then

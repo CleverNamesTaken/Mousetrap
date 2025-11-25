@@ -35,7 +35,8 @@ function M.start ()
 			" -n '" .. windowName .. "' -s Mousetrap '" .. scriptCommand .. "'" ..
 			"&& tmux set -g pane-border-status top " ..
 			"&& tmux set -g allow-rename off" ..
-			"&& tmux set -g automatic-rename off")
+			"&& tmux set -g automatic-rename off" ..
+		" && echo 0: LOCAL~Admin > /tmp/.mousetrap.yaml")
         require("mousetrap.paneOps").namePane(terminalName)
 	print("Starting Mousetrap...")
 	vim.g.commandIndex = 0

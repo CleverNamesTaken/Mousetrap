@@ -75,7 +75,8 @@ Keybindings can be modified in `plugins/mousetrap.lua`.  There are a lot here, a
 
 Known bugs:
 
-- If you drop into a docker container (and presumably other types of shells out there), your pane title might change.  This will break Mousetrap's ability to send commands, so implement some sort of way to revert the pane title back.
+- Script files sometimes write to /tmp, but I cannot reliably cause this to happen to fix
+
 
 Limitations:
 

@@ -139,7 +139,49 @@ function M.newPane(windowName,paneName)
         local vim_pwd = vim.fn.getcwd()
         os.execute("tmux split-window -t Mousetrap: -c " .. vim_pwd .. " '" .. scriptCommand .. "'")
         M.namePane(terminalName)
+	M.createYaml()
         return
+end
+
+function M.createYaml()
+	-- get paneId and create reference yaml
+	local tmuxCommand = "tmux display-message -t Mousetrap: -p -F '#D: #T'| tr -d '%'"
+        local f = io.popen(tmuxCommand, "r")
+        local output = f:read("*a")
+        -- remove newline
+        f:close()
+
+	file = io.open("/tmp/.mousetrap.yaml", "a")
+	file:write(output)
+	file:close()
+		return
+	end
+
+
+function M.checkPaneName()
+	--check if the pane title changed, and revert it back if it has
+	
+	--first grab the current pane_id and title
+	local tmuxCommand = "tmux display-message -t Mousetrap: -p -F '#D: #T'| tr -d '%'"
+	local f = io.popen(tmuxCommand, "r")
+        local output = f:read("*a")
+        f:close()
+
+	local pane_id, pane_title = output:match("^(%S+)%s*:%s*(.+)$")
+
+	--compare the values with what mousetrap expects it to be
+
+	local file = assert(io.open("/tmp/.mousetrap.yaml", "r"))
+	for line in file:lines() do
+		local s = line:match("^%s*(.-)%s*$")
+		local key, value = s:match("^(%S+)%s*:%s*(.+)$")
+		if key == pane_id and value ~= pane_title then
+			os.execute("tmux select-pane -t Mousetrap: -T '" .. value .. "'" )
+			break
+		end
+	end
+	file:close()
+	return
 end
 
 return M
