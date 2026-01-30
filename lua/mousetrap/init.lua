@@ -2,13 +2,8 @@ local M = {}
 
 -- Check if Mousetrap is already running
 function M.checkRunning()
-	local result = os.execute("tmux has-session -t Mousetrap 2>/dev/null")
-	if result == 0 then
-		return true
-	else
-		return false
-	end
-	return
+	local success = os.execute("tmux has-session -t Mousetrap 2>/dev/null")
+	return success
 end
 
 function M.start ()
