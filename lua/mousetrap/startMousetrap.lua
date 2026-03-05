@@ -12,7 +12,7 @@ end
 
 function M.start ()
 
-	if require("mousetrap.init").checkRunning() then
+	if not require("mousetrap.init").checkRunning() then
 		print("Mousetrap is already running")
 		return
 	end
