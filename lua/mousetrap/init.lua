@@ -2,9 +2,12 @@ local M = {}
 
 -- Check if Mousetrap is already running
 function M.checkRunning()
-	local success = os.execute("tmux has-session -t Mousetrap 2>/dev/null")
-	return success
+    local handle = io.popen('tmux ls 2>/dev/null | grep -q "^Mousetrap:" && echo 1 || echo 0')
+    local result = handle:read("*a")
+    handle:close()
+    return result
 end
+
 
 function M.start ()
 	require("mousetrap.startMousetrap").start()

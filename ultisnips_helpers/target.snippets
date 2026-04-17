@@ -1,0 +1,36 @@
+global !p
+from mousetrap_helpers import *
+endglobal
+global !p
+from mousetrap_helpers import *
+endglobal
+
+snippet target
+${1:`!p snip.rv = target()`}
+${2:`!p snip.rv = lookup(t[1],"IP")`}
+endsnippet
+
+snippet box "Review box information"
+
+## $1
+
+### Metadata
+
+> REDIR
+-> FIRST_HOP
+--> SECOND_HOP
+---> THIRD_HOP
+
+######################
+# Alias: ${1:`!p snip.rv = target()`}
+# IP: ${2:`!p snip.rv = lookup(t[1],"IP")`}
+# MAC: ${3:`!p snip.rv = lookup(t[1],"MAC")`}
+# Access method: ${4:`!p snip.rv = lookup(t[1],"ACCESS")`}
+# Notes: ${5:`!p snip.rv = lookup(t[1],"NOTES")`}
+######################
+
+### Access $1
+
+$0
+
+endsnippet
